@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Emojiton — Ultra Mega Edition</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <h1>Emojiton — Ultra Mega Edition</h1>
+        <div class="subtitle">A* heavy • Matrix overload • Time-lapse • Proxy registry • Custom elements</div>
+      </div>
+
+      <div class="controls">
+        <label class="switch" title="Toggle Light / Dark">
+          <input id="theme-toggle" type="checkbox" />
+          <span class="slider"></span>
+        </label>
+
+        <div class="mode-row">
+          <select id="mode-select" aria-label="Game Mode">
+            <option value="sandbox">Sandbox</option>
+            <option value="timed">Timed</option>
+            <option value="puzzle">Puzzle</option>
+            <option value="endless">Endless</option>
+          </select>
+
+          <select id="level-select" aria-label="Level">
+            <option value="auto">Auto</option>
+          </select>
+        </div>
+
+        <div class="top-actions">
+          <button id="btn-random">Randomize</button>
+          <button id="btn-play" class="primary">Play</button>
+          <button id="btn-pause">Pause</button>
+          <button id="btn-replay">Replay</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-grid">
+      <aside class="left panel">
+        <section class="section tools">
+          <h3>Tools</h3>
+          <div class="tool-row">
+            <button class="tool active" data-tool="brush" id="tool-brush">✏️ Brush</button>
+            <button class="tool" data-tool="eraser" id="tool-eraser">🧽 Erase</button>
+            <button class="tool" data-tool="fill" id="tool-fill">🪣 Fill</button>
+            <button class="tool" data-tool="rand" id="tool-rand">🎲 Rand</button>
+            <button class="tool" data-tool="road" id="tool-road">🛣️ Road</button>
+            <button class="tool" data-tool="select" id="tool-select">🔎 Select</button>
+          </div>
+
+          <div class="zoom-row">
+            <label>Zoom</label>
+            <input id="zoom" type="range" min="0.45" max="2.6" step="0.05" value="1">
+            <div class="zoom-values"><span id="zoom-val">100%</span></div>
+          </div>
+
+          <div class="emoji-registry">
+            <h4>Emoji Registry</h4>
+            <div id="palette" class="palette-grid" aria-live="polite"></div>
+            <div class="emoji-add">
+              <input id="emoji-input" placeholder="Paste emoji (e.g. 🏠)" />
+              <button id="emoji-add-btn">Add</button>
+            </div>
+            <div class="registry-controls">
+              <button id="btn-export-reg">Export Pack</button>
+              <button id="btn-clear-reg">Clear Pack</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section persistence">
+          <h4>Save & Share</h4>
+          <div class="save-row">
+            <input id="save-name" placeholder="Name (slot)" />
+            <button id="btn-save">Save</button>
+          </div>
+          <div class="save-actions">
+            <button id="btn-export">Export</button>
+            <button id="btn-import">Import</button>
+            <input id="file-import" type="file" accept="application/json" style="display:none" />
+            <button id="btn-share">Share (URL)</button>
+            <button id="btn-clear">Clear</button>
+          </div>
+        </section>
+
+        <section class="section gimmicks">
+          <h4>Gimmicks</h4>
+          <div class="gimmicks">
+            <button id="btn-matrix">Matrix Rain</button>
+            <button id="btn-konami">Unlock Surprise</button>
+            <button id="btn-sound">Toggle Sounds</button>
+            <button id="btn-worker">A* Worker (toggle)</button>
+          </div>
+        </section>
+      </aside>
+
+      <section class="center panel">
+        <div class="canvas-toolbar">
+          <div class="stats">
+            <span>Grid: <strong id="ui-dims"></strong></span>
+            <span>Filled: <strong id="ui-filled">0</strong></span>
+            <span>Score: <strong id="ui-score">0</strong></span>
+          </div>
+          <div class="shortcuts">Shortcuts: B Brush • E Erase • F Fill • Z Zoom • M Matrix • ↑↑↓↓←→←→ B A = Konami</div>
+        </div>
+
+        <div id="viewport" class="viewport" tabindex="0" aria-label="Emojiton viewport">
+          <div id="grid-wrap" class="grid-wrap" style="--cell:48px;"></div>
+          <canvas id="matrix-canvas" class="matrix-canvas"></canvas>
+        </div>
+
+        <div class="play-controls">
+          <label>Speed</label>
+          <input id="sim-speed" type="range" min="0.25" max="3" step="0.25" value="1" />
+          <div class="play-toggles">
+            <button id="btn-step">Step</button>
+            <button id="btn-sim">Simulate</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="right panel">
+        <section class="section levels">
+          <h4>Levels</h4>
+          <div id="levels" class="levels-list"></div>
+        </section>
+
+        <section class="section log">
+          <h4>Event Log</h4>
+          <div id="log" class="log"></div>
+        </section>
+
+        <section class="section replay">
+          <h4>Replay Controls</h4>
+          <div class="replay-controls">
+            <button id="btn-undo">Undo</button>
+            <button id="btn-redo">Redo</button>
+            <button id="btn-timelapse">Time-lapse</button>
+            <button id="btn-export-gif">Export Snapshot</button>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="foot">
+      <small>Emojiton Ultra • Static • A* in WebWorker • Matrix canvas • Responsive</small>
+    </footer>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
